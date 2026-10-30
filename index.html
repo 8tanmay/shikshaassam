@@ -338,6 +338,77 @@
             transform: scale(1.04); box-shadow: 0 8px 16px rgba(0, 122, 255, 0.25);
         }
 
+        /* STUDENT DASHBOARD MODAL & COMPONENTS */
+        .dash-header-card {
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.12) 0%, rgba(88, 86, 214, 0.12) 100%);
+            border: 0.5px solid rgba(0, 122, 255, 0.25);
+            border-radius: var(--radius-squircle-lg); padding: 22px; margin-bottom: 22px;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+        }
+
+        .dash-user-info h3 { font-size: 1.3rem; font-weight: 800; color: var(--ios-text-primary); margin-bottom: 2px; }
+        .dash-user-info p { font-size: 0.85rem; color: var(--ios-text-secondary); font-weight: 500; }
+
+        .dash-overall-badge {
+            background: var(--ios-card-solid); border: 0.5px solid var(--ios-border);
+            padding: 12px 18px; border-radius: var(--radius-squircle-md);
+            text-align: center; box-shadow: var(--ios-shadow-sm); min-width: 130px;
+        }
+
+        .dash-overall-num { font-size: 1.5rem; font-weight: 800; color: var(--ios-blue); }
+        .dash-overall-lbl { font-size: 0.72rem; font-weight: 700; color: var(--ios-text-secondary); text-transform: uppercase; }
+
+        .dash-stats-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 24px;
+        }
+
+        .dash-stat-box {
+            background: var(--ios-bg); border: 0.5px solid var(--ios-border);
+            border-radius: var(--radius-squircle-md); padding: 14px; text-align: center;
+        }
+
+        .dash-stat-val { font-size: 1.25rem; font-weight: 800; color: var(--ios-text-primary); }
+        .dash-stat-desc { font-size: 0.75rem; color: var(--ios-text-secondary); font-weight: 600; margin-top: 2px; }
+
+        .dash-progress-bar-container {
+            width: 100%; height: 8px; background: rgba(118, 118, 128, 0.16);
+            border-radius: var(--radius-pill); overflow: hidden; margin: 8px 0 16px;
+        }
+
+        .dash-progress-fill {
+            height: 100%; background: linear-gradient(90deg, var(--ios-blue), var(--ios-teal));
+            border-radius: var(--radius-pill); transition: width 0.4s ease;
+        }
+
+        .dash-subject-row {
+            background: var(--ios-bg); border: 0.5px solid var(--ios-border);
+            border-radius: var(--radius-squircle-md); padding: 16px; margin-bottom: 12px;
+        }
+
+        .dash-subject-meta {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;
+        }
+
+        .dash-subject-title { font-size: 0.95rem; font-weight: 700; color: var(--ios-text-primary); display: flex; align-items: center; gap: 6px; }
+        .dash-subject-pct { font-size: 0.85rem; font-weight: 800; color: var(--ios-blue); }
+
+        .dash-checklist {
+            display: flex; flex-direction: column; gap: 8px; margin-top: 12px;
+            padding-top: 12px; border-top: 0.5px dashed var(--ios-border);
+        }
+
+        .dash-check-item {
+            display: flex; align-items: center; justify-content: space-between;
+            font-size: 0.85rem; color: var(--ios-text-primary); cursor: pointer;
+            padding: 6px 10px; border-radius: 8px; transition: background 0.2s;
+        }
+
+        .dash-check-item:hover { background: rgba(0, 122, 255, 0.06); }
+
+        .dash-check-item input[type="checkbox"] {
+            width: 18px; height: 18px; accent-color: var(--ios-blue); cursor: pointer;
+        }
+
         /* DEDICATED VIDEO HUB SECTION */
         .video-hub-section {
             max-width: 1180px; margin: 0 auto 70px; padding: 0 24px;
@@ -606,7 +677,7 @@
 
         .modal-content {
             background: var(--ios-card-solid); border: 0.5px solid var(--ios-border-light);
-            border-radius: var(--radius-squircle-lg); max-width: 600px; width: 100%;
+            border-radius: var(--radius-squircle-lg); max-width: 680px; width: 100%;
             max-height: 85vh; overflow-y: auto; padding: 28px;
             position: relative; box-shadow: var(--ios-shadow-lg); animation: iosSheetSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -723,7 +794,7 @@
             .nav-links { display: none; }
             .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 16px; }
             .subject-header-banner { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .liquid-glass-dock { bottom: 12px; padding: 6px 12px; gap: 8px; width: 92%; justify-space-around; }
+            .liquid-glass-dock { bottom: 12px; padding: 6px 12px; gap: 8px; width: 92%; justify-content: space-around; }
             .dock-label-pill span { display: none; }
         }
     </style>
@@ -1093,7 +1164,7 @@
                     </span>
                 </div>
                 <div class="faq-answer">
-                    Registration is 100% free! Creating an account helps you save your favorite subjects and access high-definition video streams across devices.
+                    Registration is 100% free! Creating an account helps you save your favorite subjects and track your learning progress across devices.
                 </div>
             </div>
         </div>
@@ -1151,6 +1222,19 @@
             <p style="font-size: 0.78rem; margin-top: 8px;">© 2026 Shiksha Assam. Free Educational Community Initiative.</p>
         </div>
     </footer>
+
+    <!-- STUDENT DASHBOARD MODAL -->
+    <div class="modal-overlay" id="dashboard-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('dashboard-modal')">&times;</button>
+            <h2 style="margin-bottom: 4px;">Student Learning Dashboard</h2>
+            <p style="color: var(--ios-text-secondary); font-size: 0.88rem; margin-bottom: 18px;">Track your course progress, completed chapters, and watch stats.</p>
+            
+            <div id="dash-modal-body">
+                <!-- DYNAMICALLY POPULATED BY JAVASCRIPT -->
+            </div>
+        </div>
+    </div>
 
     <!-- REGISTRATION / LOGIN / FORGOT PASSWORD AUTH MODAL -->
     <div class="modal-overlay" id="register-modal">
@@ -1373,6 +1457,7 @@
         let usersDb = JSON.parse(localStorage.getItem('shiksha_users_db') || '{}');
         let currentUser = JSON.parse(localStorage.getItem('shiksha_user') || 'null');
         let bookmarks = JSON.parse(localStorage.getItem('shiksha_bookmarks') || '{}');
+        let userProgress = JSON.parse(localStorage.getItem('shiksha_progress') || '{}');
 
         const searchInput = document.getElementById("search-input");
 
@@ -1414,10 +1499,10 @@
             const container = document.getElementById('auth-status-container');
             if (currentUser) {
                 container.innerHTML = `
-                    <span style="font-size:0.85rem; font-weight:700; color:var(--ios-blue); margin-right:4px; display:inline-flex; align-items:center; gap:6px;">
+                    <button class="btn-act" onclick="openStudentDashboard()" style="background: rgba(0, 122, 255, 0.1); border-color: rgba(0, 122, 255, 0.3);">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                        ${currentUser.name} (${currentUser.district})
-                    </span>
+                        Dashboard
+                    </button>
                     <button class="btn-act" onclick="handleLogout()">Logout</button>
                 `;
             } else {
@@ -1536,6 +1621,121 @@
             currentUser = null;
             updateAuthUI();
             showToast("You have logged out.");
+        }
+
+        /* STUDENT PROGRESS DASHBOARD LOGIC */
+        function toggleChapterCompletion(chapterKey) {
+            if (!currentUser) return;
+            const userKey = currentUser.contact;
+            if (!userProgress[userKey]) userProgress[userKey] = {};
+
+            userProgress[userKey][chapterKey] = !userProgress[userKey][chapterKey];
+            localStorage.setItem('shiksha_progress', JSON.stringify(userProgress));
+
+            renderStudentDashboardBody();
+            showToast(userProgress[userKey][chapterKey] ? "Chapter marked as Completed! 🎉" : "Progress updated.");
+        }
+
+        function openStudentDashboard() {
+            if (!currentUser) {
+                openModal('register-modal');
+                return;
+            }
+            renderStudentDashboardBody();
+            openModal('dashboard-modal');
+        }
+
+        function renderStudentDashboardBody() {
+            const body = document.getElementById('dash-modal-body');
+            if (!body || !currentUser) return;
+
+            const userKey = currentUser.contact;
+            const userProgMap = userProgress[userKey] || {};
+
+            let totalChapters = 0;
+            let completedChapters = 0;
+
+            scienceSubjects.forEach(sub => {
+                sub.chapters.forEach(chap => {
+                    totalChapters++;
+                    const cKey = `${sub.id}_${chap}`;
+                    if (userProgMap[cKey]) completedChapters++;
+                });
+            });
+
+            const overallPct = totalChapters > 0 ? Math.round((completedChapters / totalChapters) * 100) : 0;
+
+            let html = `
+                <div class="dash-header-card">
+                    <div class="dash-user-info">
+                        <h3>${currentUser.name}</h3>
+                        <p>Class ${currentUser.classNum} Science • ${currentUser.district} District</p>
+                    </div>
+                    <div class="dash-overall-badge">
+                        <div class="dash-overall-num">${overallPct}%</div>
+                        <div class="dash-overall-lbl">Syllabus Done</div>
+                    </div>
+                </div>
+
+                <div class="dash-stats-grid">
+                    <div class="dash-stat-box">
+                        <div class="dash-stat-val">${completedChapters} / ${totalChapters}</div>
+                        <div class="dash-stat-desc">Chapters Mastered</div>
+                    </div>
+                    <div class="dash-stat-box">
+                        <div class="dash-stat-val">8.5 hrs</div>
+                        <div class="dash-stat-desc">Watch Time</div>
+                    </div>
+                    <div class="dash-stat-box">
+                        <div class="dash-stat-val">88%</div>
+                        <div class="dash-stat-desc">DPP Accuracy</div>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 1.05rem; font-weight: 700; margin: 18px 0 10px;">Subject Syllabus Progress</h3>
+            `;
+
+            scienceSubjects.forEach(sub => {
+                let subTotal = sub.chapters.length;
+                let subDone = 0;
+
+                sub.chapters.forEach(chap => {
+                    if (userProgMap[`${sub.id}_${chap}`]) subDone++;
+                });
+
+                let subPct = Math.round((subDone / subTotal) * 100);
+
+                html += `
+                    <div class="dash-subject-row">
+                        <div class="dash-subject-meta">
+                            <span class="dash-subject-title">${sub.title}</span>
+                            <span class="dash-subject-pct">${subDone}/${subTotal} (${subPct}%)</span>
+                        </div>
+                        <div class="dash-progress-bar-container">
+                            <div class="dash-progress-fill" style="width: ${subPct}%;"></div>
+                        </div>
+                        <div class="dash-checklist">
+                `;
+
+                sub.chapters.forEach(chap => {
+                    const cKey = `${sub.id}_${chap}`;
+                    const isChecked = !!userProgMap[cKey];
+
+                    html += `
+                        <label class="dash-check-item">
+                            <span>${chap}</span>
+                            <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleChapterCompletion('${cKey}')">
+                        </label>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+
+            body.innerHTML = html;
         }
 
         function watchVideo(chapterName) {
